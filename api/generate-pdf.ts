@@ -68,9 +68,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     await browser.close();
 
     // Send the generated PDF
+    // page.pdf() returns a Uint8Array. We must convert it to a Node Buffer 
+    // so Vercel res.send() transmits raw binary instead of JSON-stringifying it.
+    const nodeBuffer = Buffer.from(pdfBuffer);
+    
     res.setHeader('Content-Type', 'application/pdf');
     res.setHeader('Content-Disposition', 'attachment; filename="report.pdf"');
-    res.status(200).send(pdfBuffer);
+    res.status(200).send(nodeBuffer);
 
   } catch (error: any) {
     console.error('Error generating PDF:', error);
