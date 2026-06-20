@@ -1,0 +1,30 @@
+{
+  "name": "ifcc-functions",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/A2SGit/ifcc-functions.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/A2SGit/ifcc-functions/issues"
+  },
+  "homepage": "https://github.com/A2SGit/ifcc-functions#readme",
+  "dependencies": {
+    "@sparticuz/chromium": "^149.0.0",
+    "puppeteer-core": "^25.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^26.0.0",
+    "@vercel/node": "^5.8.17",
+    "typescript": "^6.0.3"
+  }
+}
