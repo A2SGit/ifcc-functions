@@ -58,6 +58,22 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     // Set the HTML content
     await page.setContent(html, { waitUntil: 'load' });
 
+    // Wait for web fonts and network resources to finish loading
+    await page.evaluateHandle('document.fonts.ready');
+    await page.waitForNetworkIdle({ idleTime: 500, timeout: 5000 }).catch(() => {});
+
+    // Inject CSS to ensure the body can expand past one page
+    await page.addStyleTag({
+      content: `
+        @media print {
+          html, body {
+            height: initial !important;
+            overflow: visible !important;
+          }
+        }
+      `
+    });
+
     // Generate the PDF
     const pdfBuffer = await page.pdf({
       format: 'A4',
