@@ -48,15 +48,15 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     // Launch headless Chromium
     const browser = await puppeteer.launch({
       args: chromium.args,
-      defaultViewport: chromium.defaultViewport,
+      defaultViewport: { width: 1920, height: 1080 },
       executablePath: await chromium.executablePath(),
-      headless: chromium.headless,
+      headless: true,
     });
 
     const page = await browser.newPage();
     
     // Set the HTML content
-    await page.setContent(html, { waitUntil: 'networkidle0' });
+    await page.setContent(html, { waitUntil: 'load' });
 
     // Generate the PDF
     const pdfBuffer = await page.pdf({
